@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.11.2"
+  },
+  "dependencies": {
+    "@confluxfans/contracts": "^0.3.0",
+    "@openzeppelin/contracts": "^4.7.3",
+    "eslint": "^8.23.1",
+    "hardhat-conflux": "^0.1.1"
+  }
+}
