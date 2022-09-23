@@ -78,7 +78,6 @@ async function summary() {
     let erc721 = await conflux.getContractAt("MYERC721", contractAddrs.erc721);
     let receipt = await erc721.mint().sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721", "mint", receipt))
-    // return
 
     receipt = await erc721.transferFrom(accounts[0].address, receivers[0], 0).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721", "transferFrom -> poor user", receipt))
@@ -86,18 +85,14 @@ async function summary() {
     receipt = await erc721.mint().sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc721.transferFrom(accounts[0].address, receivers[0], 1).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721", "transferFrom -> rich user", receipt))
-    // actions.push({ contractType: "erc721", name: "transferFrom -> rich user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     receipt = await erc721.mint().sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc721.safeTransferFrom(accounts[0].address, receivers[1], 2).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721", "safeTransferFrom -> poor user", receipt))
-    // actions.push({ contractType: "erc721", name: "safeTransferFrom -> poor user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     receipt = await erc721.mint().sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc721.safeTransferFrom(accounts[0].address, receivers[1], 3).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721", "safeTransferFrom -> rich user", receipt))
-    // actions.push({ contractType: "erc721", name: "safeTransferFrom -> rich user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-
 
     // ============= erc721 enum ==============
     console.log("run erc721 enum")
@@ -105,26 +100,21 @@ async function summary() {
     let erc721Enum = await conflux.getContractAt("MYERC721Enumberable", contractAddrs.erc721Enum);
     receipt = await erc721Enum.mint().sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721Enum", "mint", receipt))
-    // actions.push({ contractType: "erc721Enum", name: "mint", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("aa")
+
     receipt = await erc721Enum.transferFrom(accounts[0].address, receivers[0], 0).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721Enum", "transferFrom -> poor user", receipt))
-    // actions.push({ contractType: "erc721Enum", name: "transferFrom -> poor user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("bb")
+
     receipt = await erc721Enum.mint().sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc721Enum.transferFrom(accounts[0].address, receivers[0], 1).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721Enum", "transferFrom -> rich user", receipt))
-    // actions.push({ contractType: "erc721Enum", name: "transferFrom -> rich user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("cc")
+
     receipt = await erc721Enum.mint().sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc721Enum.safeTransferFrom(accounts[0].address, receivers[1], 2).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721Enum", "safeTransferFrom -> poor user", receipt))
-    // actions.push({ contractType: "erc721Enum", name: "safeTransferFrom -> poor user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("dd")
+
     receipt = await erc721Enum.mint().sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc721Enum.safeTransferFrom(accounts[0].address, receivers[1], 3).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc721Enum", "safeTransferFrom -> rich user", receipt))
-    // actions.push({ contractType: "erc721Enum", name: "safeTransferFrom -> rich user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     // ============= erc1155 ==============
     console.log("run erc1155")
@@ -132,20 +122,16 @@ async function summary() {
     let erc1155 = await conflux.getContractAt("MYERC1155", contractAddrs.erc1155);
     receipt = await erc1155.mint(10).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155", "mint", receipt))
-    // actions.push({ contractType: "erc1155", name: "mint", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("aa")
+    
     receipt = await erc1155.safeTransferFrom(accounts[0].address, receivers[0], 0, 1, []).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155", "safeTransferFrom -> poor user", receipt))
-    // actions.push({ contractType: "erc1155", name: "safeTransferFrom -> poor user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("bb")
+    
     receipt = await erc1155.safeTransferFrom(accounts[0].address, receivers[0], 0, 1, []).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155", "safeTransferFrom -> owned t0 token", receipt))
-    // actions.push({ contractType: "erc1155", name: "safeTransferFrom -> owned t0 token", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
-    console.log("cc")
+    
     receipt = await erc1155.mint(10).sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc1155.safeTransferFrom(accounts[0].address, receivers[0], 1, 1, []).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155", "safeTransferFrom -> owned t0 and send t1", receipt))
-    // actions.push({ contractType: "erc1155", name: "safeTransferFrom -> owned t0 and send t1", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     // ============= erc1155 enum ==============
     console.log("run erc1155 enum")
@@ -153,20 +139,16 @@ async function summary() {
     let erc1155Enum = await conflux.getContractAt("MYERC1155Enumberable", contractAddrs.erc1155Enum);
     receipt = await erc1155Enum.mint(10).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155Enum", "mint", receipt))
-    // actions.push({ contractType: "erc1155Enum", name: "mint", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     receipt = await erc1155Enum.safeTransferFrom(accounts[0].address, receivers[0], 0, 1, []).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155Enum", "safeTransferFrom -> poor user", receipt))
-    // actions.push({ contractType: "erc1155Enum", name: "safeTransferFrom -> poor user", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     receipt = await erc1155Enum.safeTransferFrom(accounts[0].address, receivers[0], 0, 1, []).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155Enum", "safeTransferFrom -> owned t0 token", receipt))
-    // actions.push({ contractType: "erc1155Enum", name: "safeTransferFrom -> owned t0 token", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
     receipt = await erc1155Enum.mint(10).sendTransaction({ from: accounts[0].address, }).executed();
     receipt = await erc1155Enum.safeTransferFrom(accounts[0].address, receivers[0], 1, 1, []).sendTransaction({ from: accounts[0].address, }).executed();
     actions.push(new Action("erc1155Enum", "safeTransferFrom -> owned t0 and send t1", receipt))
-    // actions.push({ contractType: "erc1155Enum", name: "safeTransferFrom -> owned t0 and send t1", gas: receipt.gasUsed, collateral: receipt.storageCollateralized, hash: receipt.transactionHash })
 
 
     const actStrs = actions.map((a: Action) => `${a.contractType}|${a.name}|${a.gas}|${a.collateral}|${a.hash}`)
